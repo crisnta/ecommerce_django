@@ -9,7 +9,7 @@
 /coverage
 
 #tailwinds_components
-/tailwinds_components
+/tailwind_components
 
 # misc
 .env
