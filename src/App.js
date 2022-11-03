@@ -11,7 +11,10 @@ import Activate from './containers/auth/Activate'
 import ResetPassword from './containers/auth/ResetPassword';
 import ResetPasswordComfirm from './containers/auth/ResetPasswordComfirm';
 import Shop from './containers/Shop';
-import ProductDetail from './containers/pages/productDetail';
+import ProductDetail from './containers/pages/Search';
+import Search from './containers/pages/Search';
+
+
 
 
 function App() {
@@ -31,6 +34,8 @@ function App() {
 
             <Route exact path="/shop" element={<Shop/>}/>
             <Route exact path="/product/:productId" element={<ProductDetail/>}/>
+
+            <Route exact path="/search" element={<Search/>}/>
 
 
           </Routes>
