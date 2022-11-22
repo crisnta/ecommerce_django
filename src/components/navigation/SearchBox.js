@@ -22,7 +22,7 @@ const SearchBox = ({
                   {
                       categories?.map((category, index) => (
                           <option key={index} value={category.id}>
-                              {category.name}
+                              {category.name} {category.id}
                           </option>
                       ))
                   }

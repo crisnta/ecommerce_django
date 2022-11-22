@@ -97,7 +97,8 @@ function Navbar({
   user,
   logout,
   get_categories,
-  categories
+  categories,
+  get_search_products,
 }) {
 
   const [redirect, setRedirect] = useState(false);
@@ -116,6 +117,8 @@ function Navbar({
 
   const onSubmit = e => {
     e.preventDefault();
+    console.log('search', search);
+    console.log('categoryid', category_id);
     get_search_products(search, category_id);
     setRender(!render);
   }
@@ -228,8 +231,8 @@ function Navbar({
             
             <Link to="/cart" className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
               <span className="sr-only">Open menu</span>
-              <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
-              <span className="text-xs absolute top-1 mt-3 ml-4 bg-red-500 text-white font-semibold rounded-full px-2 text-center">{total_items}</span>
+              {/* <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" /> */}
+              {/* <span className="text-xs absolute top-1 mt-3 ml-4 bg-red-500 text-white font-semibold rounded-full px-2 text-center">{total_items}TOTAL Items</span> */}
             </Link>
             <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
               <span className="sr-only">Open menu</span>
@@ -254,8 +257,8 @@ function Navbar({
             </Popover.Group>
             <div className="flex items-center md:ml-12">
               <Link to="/cart">
-                <ShoppingCartIcon className="h-8 w-8 cursor-pointer text-gray-300 mr-4"/>
-                <span className="text-xs absolute top-1 mt-3 ml-4 bg-red-500 text-white font-semibold rounded-full px-2 text-center">{total_items}</span>
+                {/* <ShoppingCartIcon className="h-8 w-8 cursor-pointer text-gray-300 mr-4"/> */}
+                {/* <span className="text-xs absolute top-1 mt-3 ml-4 bg-red-500 text-white font-semibold rounded-full px-2 text-center">{total_items}</span> */}
               </Link>
               {
                 isAuthenticated ? authLinks:guestLinks
@@ -384,7 +387,7 @@ const mapStateToProps = state => ({
   isAuthenticated: state.Auth.isAuthenticated,
   user: state.Auth.user,
   categories: state.Categories.categories,
-  total_items: state.Cart.total_items
+  //total_items: state.Cart.total_items
 })
 
 export default connect(mapStateToProps,{

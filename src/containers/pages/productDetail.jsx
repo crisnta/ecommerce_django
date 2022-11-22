@@ -57,6 +57,7 @@ const ProductDetail = ({
     get_related_products,
     product
 }) =>{
+    console.log('dentro de productdetail')
     const params = useParams()
     const productId = params.productId
 

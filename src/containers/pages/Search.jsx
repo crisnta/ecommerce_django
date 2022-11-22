@@ -93,9 +93,9 @@ const Search = ({
     } = formData
 
     useEffect(() => {
+        window.scrollTo(0,0)
         get_categories()
         get_products()
-        window.scrollTo(0,0)
     }, [])
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value})
@@ -276,7 +276,7 @@ const Search = ({
                       <Disclosure.Panel className="pt-6">
                         <div className="space-y-6">
                           {
-                              prices?.map((price, index) => {
+                              prices && prices.map((price, index) => {
                                   if (price.id === 0) {
                                       return (
                                           <div key={index} className='form-check'>
@@ -388,10 +388,7 @@ const Search = ({
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative z-10 flex items-baseline justify-between pt-24 pb-6 border-b border-gray-200">
             <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">Productos 
-             ({searched_products &&
-                searched_products !== null &&
-                searched_products !== undefined &&
-                searched_products.length})</h1>
+             ({searched_products && searched_products.length})</h1>
 
             <div className="flex items-center">
               <button
@@ -416,7 +413,10 @@ const Search = ({
                 <h3 className="sr-only">Categories</h3>
                 <ul role="list" className="text-sm font-medium text-gray-900 space-y-4 pb-6 border-b border-gray-200">
                 {
-                        categories?.map(category => {
+                        categories &&
+                        categories !== null &&
+                        categories !== undefined &&
+                        categories.map(category => {
                             if (category.sub_categories.length === 0){
                                 return (
                                     <div key={category.id} className=' flex items-center h-5 my-5'>
@@ -483,7 +483,7 @@ const Search = ({
                       <Disclosure.Panel className="pt-6">
                         <div className="space-y-6">
                           {
-                              prices?.map((price, index) => {
+                              prices && prices.map((price, index) => {
                                   if (price.id === 0) {
                                       return (
                                           <div key={index} className='form-check'>
