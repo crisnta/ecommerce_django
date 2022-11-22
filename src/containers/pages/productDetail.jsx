@@ -1,14 +1,38 @@
-import { useParams } from 'react-router-dom'
-import Layout from '../../hocs/Layout'
-import { connect } from 'react-redux'
-import { get_product,
-        get_related_products
-} from '../../redux/actions/product'
-import { useEffect, useState } from 'react'
-import { Disclosure, RadioGroup, Tab } from '@headlessui/react'
-import { StarIcon } from '@heroicons/react/solid'
-import { HeartIcon, MinusSmIcon, PlusSmIcon } from '@heroicons/react/outline'
-import ImageGallery from '../../components/product/ImageGallery'
+import Layout from "../../hocs/Layout"
+import {useParams} from 'react-router'
+import { connect } from 'react-redux';
+import {useNavigate} from 'react-router-dom';
+// import { 
+//   add_wishlist_item, 
+//   get_wishlist_items, 
+//   get_wishlist_item_total ,
+//   remove_wishlist_item
+// } from '../../redux/actions/wishlist';
+import { 
+    get_product,
+    //get_related_products 
+} from "../../redux/actions/product";
+// import {
+//   get_reviews,
+//   get_review,
+//   create_review,
+//   update_review,
+//   delete_review,
+//   filter_reviews
+// } from '../../redux/actions/reviews';
+import { Circles } from "react-loader-spinner";
+import { 
+    get_items,
+    add_item,
+    get_total,
+    get_item_total
+} from "../../redux/actions/cart";
+import { useEffect, useState } from "react";
+import ImageGallery from "../../components/product/ImageGallery";
+//import WishlistHeart from "../../components/product/WishlistHeart";
+import { Navigate } from "react-router";
+
+//import Stars from '../../components/product/Stars'
 
 const product = {
     name: 'Zip Tote Basket',
@@ -54,17 +78,34 @@ const product = {
 
 const ProductDetail = ({
     get_product,
-    get_related_products,
-    product
+    //get_related_products,
+    product,
+    get_items,
+    add_item,
+    get_total,
+    get_item_total
 }) =>{
-    console.log('dentro de productdetail')
+    const [loading, setLoading] = useState(false);
     const params = useParams()
     const productId = params.productId
+    const navigate = useNavigate();
+
+    const addToCart = async () => {
+      if (product && product.quantity > 0) {
+          setLoading(true)
+          await add_item(product);
+          await get_items();
+          await get_total();
+          await get_item_total();
+          setLoading(false)
+          navigate('/cart')
+      }
+    }
 
     useEffect(() => {
       window.scrollTo(0,0)
       get_product(productId)
-      get_related_products(productId)
+      //get_related_products(productId)
       
     }, [])
     
@@ -132,10 +173,7 @@ const ProductDetail = ({
 
               <p className="mt-4">
                   {
-                      product && 
-                      product !== null &&
-                      product !== undefined && 
-                      product.quantity > 0 ? (
+                      product && product.quantity > 0 ? (
                           <span className='text-green-500'>
                               In Stock
                           </span>
@@ -147,10 +185,10 @@ const ProductDetail = ({
                   }
               </p>
 
-              {/* <div className="mt-4 flex sm:flex-col1">
+              <div className="mt-4 flex sm:flex-col1">
                 {loading?<button 
                   className="max-w-xs flex-1 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full">
-                    <Loader
+                    <Circles
                     type="Oval"
                     color="#fff"
                     width={20}
@@ -162,13 +200,13 @@ const ProductDetail = ({
                   Agregar al Carrito
               </button>}
 
-                <WishlistHeart 
+                {/* <WishlistHeart 
                 product={product}
                 wishlist={wishlist}
                 addToWishlist={addToWishlist}
-                />
+                /> */}
 
-              </div> */}
+              </div>
             </div>
           </div>
           {/* <section className='my-5 max-w-7xl'>
@@ -336,6 +374,11 @@ const mapStateProps = state => ({
     product: state.Products.product
 })
 export default connect(mapStateProps, {
-get_product,
-get_related_products
+  get_product,
+  //get_related_products,
+  get_items,
+  add_item,
+  get_total,
+  get_item_total,
+
 })(ProductDetail)

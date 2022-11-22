@@ -13,9 +13,7 @@ import ResetPasswordComfirm from './containers/auth/ResetPasswordComfirm';
 import Shop from './containers/Shop';
 import ProductDetail from './containers/pages/productDetail';
 import Search from './containers/pages/Search';
-
-
-
+import Cart from './containers/pages/Cart';
 
 function App() {
   return (
@@ -25,6 +23,7 @@ function App() {
             {/* Error Dsiplay */}
             <Route path="*" element={<Error404/>}/>
             <Route exact path="/" element={<Home/>}/>
+            <Route exact path="/cart" element={<Cart/>}/>
             {/*Authetication*/}
             <Route exact path="/signup" element={<Signup/>}/>
             <Route exact path="/login" element={<Login/>}/>
