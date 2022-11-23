@@ -5,11 +5,13 @@ import Categories from "./categories";
 import Products from "./product";
 import Cart from './cart'
 import Shipping from "./shipping";
+import Wishlist from './wishlist';
 export default combineReducers({
     Auth, 
     Alert,
     Categories,
     Products,
     Cart,
-    Shipping
+    Shipping,
+    Wishlist
 })
