@@ -100,7 +100,7 @@ export const get_items = () => async (dispatch) => {
         }
 
         try {
-            const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/cart/get-items`, config);
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/cart/cart-items`, config);
 
             if (res.status === 201) {
                 dispatch({
