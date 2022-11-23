@@ -24,7 +24,7 @@ export const get_reviews = product_id => async dispatch => {
 
     try {
         const res = await axios.get(
-            `${process.env.REACT_APP_API_URL}/api/reviews/get-reviews/${product_id}`, 
+            `${process.env.REACT_APP_API_URL}/api/review/get-reviews/${product_id}`, 
             config
         );
 
@@ -45,7 +45,6 @@ export const get_reviews = product_id => async dispatch => {
     }
 }
 
-
 export const get_review = product_id => async dispatch => {
     if (localStorage.getItem('access')) {
         const config = {
@@ -57,7 +56,7 @@ export const get_review = product_id => async dispatch => {
 
         try {
             const res = await axios.get(
-                `${process.env.REACT_APP_API_URL}/api/reviews/get-review/${product_id}`, 
+                `${process.env.REACT_APP_API_URL}/api/review/get-review/${product_id}`, 
                 config
             );
 
@@ -96,7 +95,7 @@ export const create_review = (product_id, rating, comment) => async dispatch => 
 
         try {
             const res = await axios.post(
-                `${process.env.REACT_APP_API_URL}/api/reviews/create-review/${product_id}`,
+                `${process.env.REACT_APP_API_URL}/api/review/create-review/${product_id}`,
                 body,
                 config
             );
@@ -136,7 +135,7 @@ export const update_review = (product_id, rating, comment) => async dispatch => 
 
         try {
             const res = await axios.put(
-                `${process.env.REACT_APP_API_URL}/api/reviews/update-review/${product_id}`,
+                `${process.env.REACT_APP_API_URL}/api/review/update-review/${product_id}`,
                 body,
                 config
             );
@@ -171,7 +170,7 @@ export const delete_review = product_id => async dispatch => {
 
         try {
             const res = await axios.delete(
-                `${process.env.REACT_APP_API_URL}/api/reviews/delete-review/${product_id}`,
+                `${process.env.REACT_APP_API_URL}/api/review/delete-review/${product_id}`,
                 config
             );
 
@@ -225,7 +224,7 @@ export const filter_reviews = (product_id, rating) => async dispatch => {
 
         try {
             const res = await axios.get(
-                `${process.env.REACT_APP_API_URL}/api/reviews/filter-reviews/${product_id}?rating=${myRating}`,
+                `${process.env.REACT_APP_API_URL}/api/review/filter-reviews/${product_id}?rating=${myRating}`,
                 config
             );
     
