@@ -6,6 +6,7 @@ import Products from "./product";
 import Cart from './cart'
 import Shipping from "./shipping";
 import Wishlist from './wishlist';
+import Review from './review';
 export default combineReducers({
     Auth, 
     Alert,
@@ -13,5 +14,6 @@ export default combineReducers({
     Products,
     Cart,
     Shipping,
-    Wishlist
+    Wishlist,
+    Review
 })
