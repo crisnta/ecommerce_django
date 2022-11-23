@@ -36,7 +36,7 @@ const CartItem = ({
                 }
                 setRender(!render);
             } catch(err) {
-
+                console.log(err)
             }
         };
 
@@ -116,8 +116,6 @@ const CartItem = ({
             <p className="mt-4 flex text-sm text-gray-700 space-x-2">
                 {     
                     item.product && 
-                    item.product !== null &&
-                    item.product !== undefined && 
                     item.product.quantity > 0 ? 
                 (
                     <>
