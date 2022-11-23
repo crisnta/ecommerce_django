@@ -122,8 +122,6 @@ const ProductDetail = ({
         if(wishlist && product){
             wishlist.map(item => {
                 if (item.product.id.toString() === product.id.toString()) {
-                    console.log(item.product.id)
-                    console.log(product.id)
                     isPresent = true;
                 }
             });

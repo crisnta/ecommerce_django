@@ -22,6 +22,7 @@ urlpatterns = [
 
     path('api/wishlist/', include('apps.wishlist.urls')),
 
+    path('api/review/', include('apps.review.urls')),
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

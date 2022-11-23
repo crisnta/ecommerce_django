@@ -38,7 +38,7 @@ DJANGO_APPS = [
 ]
 
 PROJECT_APPS = ['apps.user']
-ECOMMERCE_APPS = ['apps.category', 'apps.product', 'apps.cart', 'apps.shipping', 'apps.orders', 'apps.wishlist']
+ECOMMERCE_APPS = ['apps.category', 'apps.product', 'apps.cart', 'apps.shipping', 'apps.orders', 'apps.wishlist', 'apps.review']
 
 THIRD_PARTY_APPS = [
     'corsheaders',

@@ -48,9 +48,7 @@ const Cart = ({
         return(
             <div>
                 {
-                    items && 
-                    items !== undefined &&
-                    items !== null &&
+                    items &&
                     items.length !== 0 && 
                     items.map((item, index)=>{
                         let count = item.count;
