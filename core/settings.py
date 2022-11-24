@@ -19,13 +19,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 DOMAIN = os.environ.get('DOMAIN')
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    "devopsverse.net", 
+    ".devopsverse.net",
+    "www.devopsverse.net",
+    "127.0.0.1",
+    "localhost",
+]
 
-
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 # Application definition
 
 DJANGO_APPS = [
@@ -49,6 +57,7 @@ THIRD_PARTY_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'ckeditor',
     'ckeditor_uploader',
+    'storages'
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + ECOMMERCE_APPS + THIRD_PARTY_APPS
@@ -104,6 +113,7 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:8000',
     'http://127.0.0.1:8000',
     'http://127.0.0.1:3000',
+    'https://www.devopsverse.net',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -111,6 +121,7 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',
     'http://127.0.0.1:8000',
     'http://127.0.0.1:3000',
+    'https://www.devopsverse.net',
 ]
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.Argon2PasswordHasher",
@@ -226,3 +237,30 @@ DJOSER = {
         'user_delete': 'djoser.serializers.UserDeleteSerializer',
     },
 }
+
+ # # django-ckeditor will not work with S3 through django-storages without this line in settings.py
+AWS_QUERYSTRING_AUTH = False
+
+    # aws settings
+
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
+
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+AWS_DEFAULT_ACL = 'public-read'
+
+    # s3 static settings
+STATIC_LOCATION = 'static'
+STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+    # s3 public media settings
+
+PUBLIC_MEDIA_LOCATION = 'media'
+EDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
+DEFAULT_FILE_STORAGE = 'core.storage_backends.MediaStore'
+
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
