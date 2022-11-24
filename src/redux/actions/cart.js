@@ -71,6 +71,7 @@ export const add_item = product => async (dispatch) =>{
             if (product.id.toString() === item.product.id.toString()) {
                 shouldAddItem = false;
             }
+            
         });
 
         const order_item = {
